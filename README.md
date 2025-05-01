@@ -22,6 +22,7 @@ Blood pressure
 
 Cholesterol 
 
+```css
        [Age > 50?]
          /    \
       Yes     No
@@ -30,6 +31,8 @@ Cholesterol
    /     \
  Yes     No
 [Heart] [Healthy]
+```
+
 
 ✅ Pros:
 Easy to understand and interpret.
@@ -42,6 +45,8 @@ Can handle both numerical and categorical data.
 Prone to overfitting, especially with deep trees.
 
 Small changes in data can lead to different trees (not stable).
+
+![Decision Tree](https://github.com/user-attachments/assets/de673ea8-a300-4a2d-9e0c-56946a12fffa)
 
 
 ## Random Forest
@@ -92,6 +97,8 @@ Can be slower to predict (especially with many trees).
 
 Larger memory usage.
 
+![Random Forest](https://github.com/user-attachments/assets/775b5e87-e977-4e21-8bc5-e93ece303f33)
+
 
 ## 🔹 1. Load and Inspect the Data
 
@@ -119,6 +126,7 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 ```
 
+
 ## 🔹 3. Split Dataset
 
 ```python
@@ -137,6 +145,8 @@ param_grid = {'max_depth': [3, 5, 7, None], 'min_samples_split': [2, 5, 10]}
 grid_search_dt = GridSearchCV(DecisionTreeClassifier(random_state=42), param_grid, cv=5)
 grid_search_dt.fit(X_train, y_train)
 ```
+![Decision Tree](https://github.com/user-attachments/assets/1c318d63-6876-4e28-9432-3fafcefa7379)
+
 
 ```python
 best_dt = grid_search_dt.best_estimator_
@@ -152,6 +162,7 @@ y_pred_dt = best_dt.predict(X_test)
 print(confusion_matrix(y_test, y_pred_dt))
 print(classification_report(y_test, y_pred_dt))
 ```
+![Matrices](https://github.com/user-attachments/assets/df4a9555-a4a1-4b34-b43c-0cabb24fa9a4)
 
 ## 📊 6. Visualize the Tree
 
@@ -163,6 +174,7 @@ plt.figure(figsize=(20, 10))
 plot_tree(best_dt, feature_names=X.columns, class_names=["No", "Yes"], filled=True)
 plt.show()
 ```
+![Decision Tree](https://github.com/user-attachments/assets/d8e8d156-7cd6-4448-8b2b-46f1567aef1e)
 
 ## 🌲 7. Train and Evaluate Random Forest
 
@@ -178,6 +190,8 @@ y_pred_rf = rf.predict(X_test)
 print("Random Forest Accuracy:", rf.score(X_test, y_test))
 print(classification_report(y_test, y_pred_rf))
 ```
+![Screenshot 2025-05-01 152820](https://github.com/user-attachments/assets/4ede4f22-d54d-4ad7-9ccf-b24d0277faca)
+
 
 ## 🔍 8. Feature Importances
 
@@ -193,6 +207,8 @@ plt.bar(range(X.shape[1]), importances[indices])
 plt.xticks(range(X.shape[1]), [X.columns[i] for i in indices], rotation=90)
 plt.show()
 ```
+![Screenshot 2025-05-01 152838](https://github.com/user-attachments/assets/22d98623-b7fc-46d6-83fa-61bfcf48aa81)
+
 
 ## 🔁 9. Cross-Validation Comparison
 
@@ -204,6 +220,7 @@ rf_cv = cross_val_score(rf, X, y, cv=5).mean()
 print("CV Accuracy - Decision Tree:", dt_cv)
 print("CV Accuracy - Random Forest:", rf_cv)
 ```
+
 
 ```python
 import seaborn as sns
@@ -217,6 +234,7 @@ plt.ylim(0.7, 1)
 plt.tight_layout()
 plt.show()
 ```
+![Screenshot 2025-05-01 152848](https://github.com/user-attachments/assets/4467acf4-1ad1-4f16-90c3-e5a734296eb3)
 
 ```python
 from sklearn.metrics import confusion_matrix
@@ -228,6 +246,7 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.show()
 ```
+![Screenshot 2025-05-01 152858](https://github.com/user-attachments/assets/50ec36ba-d94b-46b2-beeb-f962ca158b17)
 
 ```python
 import seaborn as sns
@@ -238,6 +257,7 @@ sns.heatmap(df.corr(), annot=True, cmap='coolwarm', fmt=".2f")
 plt.title("Correlation Heatmap")
 plt.show()
 ```
+![Screenshot 2025-05-01 152909](https://github.com/user-attachments/assets/5bf57118-8bb6-413c-8936-6c83af196516)
 
 ```python
 
